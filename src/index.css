@@ -1,13 +1,103 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+body {
+  margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#root {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+/* color palette */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.main-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  background-size: cover;
+  width: 30vw;
+  height: 60vh;
+
+  padding: 50px 50px 50px 50px;
+}
+
+.good-background {
+  background-image: url("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3MwdG9pYW5xMm0wN3R6dXJ3bWYwN3FvZTUydDVkbmN5emZxbDIxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kaI3GwO6CECEzLQo0x/giphy.gif");
+}
+.bad-background {
+  background-image: url("https://media1.giphy.com/media/KYjkGOcA1unUBKRXfC/giphy.gif?cid=ecf05e47yb0eirf1v81cycp129m0r6cymsn3f9e9ycu3a34t&ep=v1_gifs_related&rid=giphy.gif&ct=g");
+}
+
+header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  overflow: scroll;
+}
+
+li {
+  display: flex;
+  border-radius: 10px;
+  justify-content: space-between;
+  background-color: bisque;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.weather-phrase-good {
+  background-color: rgb(226, 232, 39);
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
+}
+
+.weather-phrase-bad {
+  background-color: rgb(245, 77, 0);
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
+}
+
+.delete-button {
+  padding: 10px;
+  color: #eee;
+  border: 1px #1864ab solid;
+  background-color: #f40404 transparent;
+}
+.delete-button:hover {
+  background-color: #ffb247;
+}
+
+form {
+  background-color: #1864ab;
+  padding: 10px 0px 30px 0px;
+  border-radius: 20px;
+}
+.submit-button {
+  padding: 10px;
+  color: #000000;
+  border: 1px #1864ab solid;
+  background-color: #f40404 transparent;
 }

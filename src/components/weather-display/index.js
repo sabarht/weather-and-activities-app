@@ -1,10 +1,10 @@
 export default function WeatherDisplay({ weather }) {
   return (
-    <section>
-      <span>
+    <header>
+      <h1>
         {weather.condition}
         {weather.temperature} °C
-      </span>
-    </section>
+      </h1>
+    </header>
   );
 }

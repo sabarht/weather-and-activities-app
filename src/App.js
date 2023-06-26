@@ -53,14 +53,19 @@ function App() {
   }
 
   return (
-    <div>
-      <WeatherDisplay weather={weather} />
+    <section
+      className={`main-section ${
+        weather.isGoodWeather ? "good-background" : "bad-background"
+      }`}
+    >
+      <WeatherDisplay className="weather-display" weather={weather} />
       <List
+        weather={weather}
         activities={filteredActivities}
         onDeleteActivity={handleDeleteActivity}
       />
       <Form onAddActivity={handleSubmit} />
-    </div>
+    </section>
   );
 }
 

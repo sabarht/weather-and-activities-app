@@ -1,23 +1,64 @@
 import "./App.css";
 import Form from "./components/form";
-import React from "react";
+import React, { useEffect } from "react";
 import { uid } from "uid";
 import List from "./components/list";
+import WeatherDisplay from "./components/weather-display";
 import useLocalStorageState from "use-local-storage-state";
 
-// const isGoodWeather = true;
+const URL = "https://example-apis.vercel.app/api/weather";
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [],
   });
 
+  const [weather, setWeather] = useLocalStorageState("weather", {
+    defaultValue: "",
+  });
+
+  const filteredActivities = activities.filter((activity) =>
+    weather.isGoodWeather
+      ? activity.isForGoodWeather
+      : !activity.isForGoodWeather
+  );
+  console.log("Activities: ", activities);
+  console.log("filter array", filteredActivities);
+
+  useEffect(() => {
+    async function fetchingWeatherApi() {
+      try {
+        const response = await fetch(URL);
+        const weather = await response.json();
+        console.log(weather);
+        setWeather(weather);
+      } catch (error) {
+        console.log("ERROR in FETCH: ", error);
+      }
+      const id = setInterval(fetchingWeatherApi, 600000);
+      return () => {
+        clearInterval(id);
+      };
+    }
+    fetchingWeatherApi();
+  }, [setWeather]);
+
   function handleSubmit(newActivity) {
     setActivities([...activities, { ...newActivity, id: uid() }]);
+    console.log(activities);
+  }
+  function handleDeleteActivity(id) {
+    const newActivities = activities.filter((activity) => activity.id !== id);
+    console.log("new activities ID: ", id);
+    setActivities(newActivities);
   }
 
   return (
     <div>
-      <List activities={activities} />
+      <WeatherDisplay weather={weather} />
+      <List
+        activities={filteredActivities}
+        onDeleteActivity={handleDeleteActivity}
+      />
       <Form onAddActivity={handleSubmit} />
     </div>
   );

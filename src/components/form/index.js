@@ -21,12 +21,7 @@ export default function Form({ onAddActivity }) {
         </section>
         <section>
           <label htmlFor="check-box">Good weather activity? </label>
-          <input
-            type="checkbox"
-            id="check-box"
-            name="isForGoodWeather"
-            required
-          />
+          <input type="checkbox" id="check-box" name="isForGoodWeather" />
         </section>
         <button className="submit-button" type="submit">
           Submit

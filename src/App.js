@@ -5,17 +5,17 @@ import { uid } from "uid";
 import List from "./components/list";
 import WeatherDisplay from "./components/weather-display";
 import useLocalStorageState from "use-local-storage-state";
-
-const URL = "https://example-apis.vercel.app/api/weather";
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [],
   });
-
   const [weather, setWeather] = useLocalStorageState("weather", {
     defaultValue: "",
   });
-
+  const [location, setLocation] = useLocalStorageState("location", {
+    defaultValue: "europe",
+  });
+  const URL = `https://example-apis.vercel.app/api/weather/${location}`;
   const filteredActivities = activities.filter((activity) =>
     weather.isGoodWeather
       ? activity.isForGoodWeather
@@ -23,7 +23,6 @@ function App() {
   );
   console.log("Activities: ", activities);
   console.log("filter array", filteredActivities);
-
   useEffect(() => {
     async function fetchingWeatherApi() {
       try {
@@ -34,14 +33,13 @@ function App() {
       } catch (error) {
         console.log("ERROR in FETCH: ", error);
       }
-      const id = setInterval(fetchingWeatherApi, 5000);
-      return () => {
-        clearInterval(id);
-      };
     }
     fetchingWeatherApi();
-  }, [setWeather]);
-
+    const id = setInterval(fetchingWeatherApi, 5000);
+    return () => {
+      clearInterval(id);
+    };
+  }, [URL, setWeather]);
   function handleSubmit(newActivity) {
     setActivities([...activities, { ...newActivity, id: uid() }]);
     console.log(activities);
@@ -51,13 +49,27 @@ function App() {
     console.log("new activities ID: ", id);
     setActivities(newActivities);
   }
-
   return (
     <section
       className={`main-section ${
         weather.isGoodWeather ? "good-background" : "bad-background"
       }`}
     >
+      <div className="container">
+        <label className="label-form" htmlFor="location">
+          Choose the Location:
+        </label>
+        <select
+          id="location"
+          name="location"
+          onChange={(e) => setLocation(e.target.value)}
+        >
+          <option value="europe">Europe</option>
+          <option value="arctic">Arctic</option>
+          <option value="sahara">Sahara</option>
+          <option value="rainforest">Rainforest</option>
+        </select>
+      </div>
       <WeatherDisplay className="weather-display" weather={weather} />
       <List
         weather={weather}
@@ -68,5 +80,4 @@ function App() {
     </section>
   );
 }
-
 export default App;

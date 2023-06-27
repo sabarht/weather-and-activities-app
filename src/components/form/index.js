@@ -14,14 +14,19 @@ export default function Form({ onAddActivity }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h1>Add new activity👇🏽</h1>
+        <h2>Add new activity👇🏽</h2>
         <section>
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" />
+          <label htmlFor="name">Name: </label>
+          <input type="text" id="name" name="name" required />
         </section>
         <section>
-          <label htmlFor="check-box">Good weather activity:</label>
-          <input type="checkbox" id="check-box" name="isForGoodWeather" />
+          <label htmlFor="check-box">Good weather activity? </label>
+          <input
+            type="checkbox"
+            id="check-box"
+            name="isForGoodWeather"
+            required
+          />
         </section>
         <button className="submit-button" type="submit">
           Submit

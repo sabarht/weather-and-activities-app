@@ -34,7 +34,7 @@ function App() {
       } catch (error) {
         console.log("ERROR in FETCH: ", error);
       }
-      const id = setInterval(fetchingWeatherApi, 600000);
+      const id = setInterval(fetchingWeatherApi, 5000);
       return () => {
         clearInterval(id);
       };

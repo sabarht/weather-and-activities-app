@@ -21,8 +21,6 @@ function App() {
       ? activity.isForGoodWeather
       : !activity.isForGoodWeather
   );
-  console.log("Activities: ", activities);
-  console.log("filter array", filteredActivities);
   useEffect(() => {
     async function fetchingWeatherApi() {
       try {
@@ -41,7 +39,7 @@ function App() {
     };
   }, [URL, setWeather]);
   function handleSubmit(newActivity) {
-    setActivities([...activities, { ...newActivity, id: uid() }]);
+    setActivities([{ ...newActivity, id: uid() }, ...activities]);
     console.log(activities);
   }
   function handleDeleteActivity(id) {
